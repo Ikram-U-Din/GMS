@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+    <h1>Student Records</h1>
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Total Marks</th>
+            <th>Actions</th>
+        </tr>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.name }}</td>
+            <td>{{ student.total_marks }}</td>
+            <td>
+                <a href="{{ url_for('edit', id=student.id) }}">Edit</a>
+                <form action="{{ url_for('delete', id=student.id) }}" method="post">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ url_for('add') }}">Add Student</a>
+</body>
+</html>
