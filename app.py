@@ -6,6 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app=Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///students.db'
+app.config["SQLALCHEMY_TRACK_MODIFICATION"]=False
 db = SQLAlchemy(app)
 
 class Student(db.Model):
@@ -17,7 +18,7 @@ class Student(db.Model):
         return f'<Student {self.name}>'
 
 with app.app_context():
-        db.create_all()    
+    db.create_all()    
 
 @app.route("/")
 def index():
@@ -58,5 +59,5 @@ def delete(id):
 
 
 
-if __name__ in "__main__":
+if __name__ == "__main__":
     app.run(debug=True)
